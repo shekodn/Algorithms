@@ -8,20 +8,103 @@ using namespace std;
 
 
 vector<int> vectorData(){
+	
 
-	vector<int> v;
-
-	v.push_back(5);
-	v.push_back(3);
-	v.push_back(7);
-	v.push_back(9);
-	v.push_back(1);
-	v.push_back(4);
-	v.push_back(8);
-	v.push_back(2);
-
-	return v;
 }
+
+
+void printVector(vector<int> v){
+
+for (std::vector<int>::iterator it = v.begin() ; it != v.end(); ++it)
+   cout << ' ' << *it;
+   cout << '\n';
+
+}
+
+
+
+void merge(vector<int> arr, int l, int m, int r){
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+ 
+    /* create temp arrays */
+    int L[n1], R[n2];
+ 
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+ 
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray
+    j = 0; // Initial index of second subarray
+    k = l; // Initial index of merged subarray
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+ 
+    /* Copy the remaining elements of L[], if there
+       are any */
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+ 
+    /* Copy the remaining elements of R[], if there
+       are any */
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+
+}
+
+
+/*
+
+
+*/
+
+void mergeSort(vector<int> arr, int l, int r)
+{
+    if (l < r)
+    {
+        // Same as (l+r)/2, but avoids overflow for
+        // large l and h
+        int m = l+(r-l)/2;
+ 
+        // Sort first and second halves
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+ 
+        merge(arr, l, m, r);
+    }
+}
+
+
+
+
+
+
+
+/*
 
 void quickSort(vector<int> v){
 
@@ -47,23 +130,68 @@ void merge(vector<int> arr, int size1, int size2){
 }
 
 
-void mergeSort(vector<int> v, int iFirst, int iLast){
 
-	if (iFirst < iLast) {
 
-		int iMiddle = (iFirst + iLast) / 2;
-		mergeSort(v, iFirst, iMiddle);
-		mergeSort(v, iMiddle + 1, iLast);
-		merge(v, iFirst, iLast);		
-	}
 
+
+int iCont = 0;
+//int arr[500000], c[500000];
+vector<int> arr;
+
+
+void merge(int low, int high, int mid, vector<int> arr)
+{
+    int i, j, k;
+    i = low;
+    k = low;
+    j = mid + 1;
+    while (i <= mid && j <= high){
+        if (arr[i] < arr[j]){
+            //c[k] = arr[i];
+            i++;
+        }
+        else{
+            //c[k] = arr[j];
+            iCont+= abs(k-j);
+            j++;
+        }
+        k++;
+    }
+    while (i <= mid){
+        //c[k] = arr[i];
+        k++;
+        i++;
+    }
+    while (j <= high){
+        //c[k] = arr[j];
+        k++;
+        j++;
+    }
+    for (i = low; i < k; i++){
+        //arr[i] = c[i];
+    }
 }
+*/
+
+
+
 
 
 
 int main(){
 
-	//quickSort(vector());
-	mergeSort(vectorData(), vectorData().begin(), vectorData().end());
+	vector<int> arr;
+
+	arr.push_back(5);
+	arr.push_back(3);
+	arr.push_back(7);
+	arr.push_back(9);
+	arr.push_back(1);
+	arr.push_back(4);
+	arr.push_back(8);
+	arr.push_back(2);
+
+	
+
 
 }
