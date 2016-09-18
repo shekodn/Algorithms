@@ -181,37 +181,59 @@ int bestCase(vector<Cistern> &v){
     return iSystemVolume;
 }
 
-int getRelativeSystemVolume(int iMiddle, vector<Cistern> &v,int iWaterQuantity, int iCounter){
+int getRelativeSystemVolume(int iMiddle, vector<Cistern> &v,int iWaterQuantity){
 
     int iMaxWaterHeight = 0;
     int iWater = 0;
-    int i = iCounter;
+    int i = 0;
 
     //llena cisternas que estan totalmente bajo la mitad
-    while(v[i].getRelativeHeight() <= iMiddle && !v[i].isFull()) {
-        iWater = iWater + v[i].getVolume();
-        v[i].bFull = true;
-        //iMaxWaterHeight = v[i].getRelativeHeight();
-        cout << "VOL" << v[i].getVolume() << endl;
+    while(v[i].getRelativeHeight() <= iMiddle && !v.back().isFull()) {
+
+        if(i > v.size()){
+            break;
+        }
+
+        if (!v[i].isFull()){
+
+            iWater = iWater + v[i].getRelativeVolume(v[i+1].getFloorOffset() - v[i].getFloorOffset());
+
+            if(v[i+1].getFloorOffset() >= v[i].getRelativeHeight()){
+                v[i].bFull = true;
+                cout << "Cistern " << i << " " << v[i].iCurrentVolume << endl;
+
+            } else {
+
+                v[i].iCurrentVolume = v[i].getRelativeVolume(v[i+1].getFloorOffset()  - v[i].getFloorOffset()) + v[i].iCurrentVolume;
+                cout << "Cistern " << i << " " << v[i].iCurrentVolume << endl;
+
+
+            }
+            //iMaxWaterHeight = v[i].getRelativeHeight();
+            cout << "VOL" << v[i].getVolume() << endl;
+
+            i++;
+
+        }
+
+        //llena cisternas que interesectan con middle
+        if (v[i].getFloorOffset() < iMiddle && v[i].getRelativeHeight() > iMiddle){
+
+            iWater = iWater + v[i].getRelativeVolume(iMiddle - v[i].getFloorOffset());
+            i++;
+            v[i].iCurrentVolume = v[i].getRelativeVolume(iMiddle - v[i].getFloorOffset()) + v[i].iCurrentVolume;
+            cout << "VOL PARCIAL" << v[i].getRelativeVolume(iMiddle - v[i].getFloorOffset()) << endl;
+
+            //checa si ya se lleno la cisternas
+
+        }
 
         i++;
+
     }
 
     cout << "i water" << iWater << endl;
     cout << "contador " << i << endl;
-
-
-    //llena cisternas que interesectan con middle
-    while(v[i].getRelativeHeight() <= iMiddle && !v[i].isFull()) {
-        iWater = iWater + v[i].getRelativeVolume(iMiddle - v[i].getFloorOffset());
-        i++;
-        cout << "VOL PARCIAL" << v[i].getVolume() << endl;
-
-    }
-
-    cout << "i water" << iWater << endl;
-
-
 
     return iWaterQuantity - iWater;
 
@@ -226,52 +248,38 @@ int fillCist(vector<Cistern> &v, int iLow, int iTop, int quantityOfWater){
 
     cout << "mid " << iMiddle << endl;
 
-    if (iLow > iTop ) {
+    if (iLow > iTop || overflow(v,quantityOfWater)) {
 
 		iMaxWaterHeight = -1;
-
         cout << "111";
         cout << "mid " << iMiddle << endl;
-
-
 
 	} else {
 
         int iMiddle = (iTop + iLow) / 2;
 
-		if((getRelativeSystemVolume(iMiddle, v, quantityOfWater, iCounter)) == quantityOfWater){
+		if((getRelativeSystemVolume(iMiddle, v, quantityOfWater)) == quantityOfWater){
 
-            cout << getRelativeSystemVolume(iMiddle, v, quantityOfWater, iCounter) << endl;
+            cout << getRelativeSystemVolume(iMiddle, v, quantityOfWater) << endl;
             cout << quantityOfWater << endl;
-            iCounter++;
-
 
 			iMaxWaterHeight = iMiddle;
             cout << "222 ";
             cout << "mid " << iMiddle << endl;
 
-
-
 		}  else {
 
-			if ((getRelativeSystemVolume(iMiddle, v, quantityOfWater, iCounter)) > quantityOfWater) {
+			if ((getRelativeSystemVolume(iMiddle, v, quantityOfWater)) > quantityOfWater) {
 
 				iMaxWaterHeight = fillCist(v, iLow, iMiddle, quantityOfWater);
                 cout << "333 ";
                 cout << "mid " << iMiddle << endl;
-                iCounter++;
-
-
 
 			} else {
 
 				iMaxWaterHeight = fillCist(v, iMiddle + 1, iTop, quantityOfWater);
                 cout << "444 ";
                 cout << "mid " << iMiddle << endl;
-                iCounter++;
-
-
-
 			}
 		}
 	}
