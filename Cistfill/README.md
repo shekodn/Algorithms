@@ -23,28 +23,42 @@ Output
 
 The output should consist of exactly d lines, one line for each data set. Line i, 1 <= i <= d, should contain the level that the water will reach, in meters, rounded to two fractional digits, or the word "OVERFLOW" (without quotes), if the volume of water exceeds the total capacity of the cisterns.
 
-Example
-
-Sample input:
-3
+##Sample input
+```
 2
 0 1 1 1
 2 1 1 1
 1
+```
+##Sample output
+```
+1.00
+```
+
+##Sample input
+```
 4
 11 7 5 1
 15 6 2 2
 5 8 5 1
 19 4 8 1
 132
+```
+##Sample output
+```
+OVERFLOW
+```
+
+##Sample input
+```
 4
 11 7 5 1
 15 6 2 2
 5 8 5 1
 19 4 8 1
 78
-
-Sample output:
-1.00
-OVERFLOW
+```
+##Sample output
+```
 17.00
+```
