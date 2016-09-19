@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
+
 using namespace std;
 
 struct Cistern {
@@ -61,21 +63,21 @@ int userInput(vector<Cistern> &v, int quantityOfWater){
     int iCistNumber;
     int iDepth, iHeight, iWidth, iFloorOffset;
 
-    cout << "# of cisterns --> ";
+    //cout << "# of cisterns --> ";
     cin >> iCistNumber;
 
     for (int i = 0; i < iCistNumber; i++) { //Se modifica el valor de cada cisterna
 
-        cout << "Floor offset of cistern #" << i << " --> ";
+        //cout << "Floor offset of cistern #" << i << " --> ";
         cin >> iFloorOffset;
 
-        cout << "       Depth of cistern #" << i << " --> ";
+        //cout << "       Depth of cistern #" << i << " --> ";
         cin >> iDepth;
 
-        cout << "      Height of cistern #" << i << " --> ";
+        //cout << "      Height of cistern #" << i << " --> ";
         cin >> iHeight;
 
-        cout << "       Width of cistern #" << i << " --> ";
+        //cout << "       Width of cistern #" << i << " --> ";
         cin >> iWidth;
 
         //Cistern temp(iFloorOffset, iDepth, iHeight, iWidth);
@@ -85,7 +87,7 @@ int userInput(vector<Cistern> &v, int quantityOfWater){
     }
 
 
-    cout << "Total quantity of water to store in cubic meters --> ";
+    //cout << "Total quantity of water to store in cubic meters --> ";
     cin >> quantityOfWater;
 
     return quantityOfWater;
@@ -184,9 +186,9 @@ int bestCase(vector<Cistern> &v){
 
 ////////////////////////////////////////////////////////////////////////////////
 
-int getRelativeSystemVolume(vector<Cistern> &v, int iCurrentLevel){
+int getRelativeSystemVolume(vector<Cistern> &v, float iCurrentLevel){
 
-    int iCurrentQuantityOfWater = 0;
+    float iCurrentQuantityOfWater = 0;
     int iRealtiveHeight;
 
     //objective: iCurrentQuantityOfWater
@@ -212,20 +214,16 @@ int getRelativeSystemVolume(vector<Cistern> &v, int iCurrentLevel){
     return iCurrentQuantityOfWater;
 }
 
-int fillCist(vector<Cistern> &v, int iLow, int iTop, int iDesiredQuantityOfWater, int iCurrentQuantityOfWater){
+float fillCist(vector<Cistern> &v, int iLow, int iTop, int iDesiredQuantityOfWater, int iCurrentQuantityOfWater){
 
-    int iCurrentLevel = (iTop + iLow) / 2;
-
-    cout << "Current level =  " << iCurrentLevel << endl;
+    float iCurrentLevel = (iTop + iLow) / 2;
 
     if (iLow > iTop) {
 		iCurrentLevel = -1;
-        cout << "iLow > iTop. Middle = " << iCurrentLevel;
+
 	} else {
 
         if(iDesiredQuantityOfWater == getRelativeSystemVolume(v, iCurrentLevel)){
-            cout << "IF level =  " << iCurrentLevel << endl;
-
 
         } else {
 
@@ -239,34 +237,39 @@ int fillCist(vector<Cistern> &v, int iLow, int iTop, int iDesiredQuantityOfWater
             }
         }
     }
-    cout << "Last level =  " << iCurrentLevel << endl;
 
     return iCurrentLevel;
+}
+
+void getAnswer(float n){
+
+    if(n == -1){
+        cout << "OVERFLOW" << endl;
+    } else{
+
+        cout << std::setprecision(2) << fixed << n << endl;
+
+    }
 }
 
 
 int main() {
 
     vector<Cistern> vecCisterns;
-    int quantityOfWater = userInput(vecCisterns, quantityOfWater);
 
-    //cout << "Desired quantity of water --> " << quantityOfWater << endl;
+    int quantityOfWater = userInput(vecCisterns, quantityOfWater);
 
     sortByFloorOffsetAndHeight(vecCisterns);
 
     int iSystemHeight = systemHeight(vecCisterns);
     int iLowestSystemOffeset = smallestOffset(vecCisterns);
 
-    //cout << "    System Height --> " << systemHeight(vecCisterns) <<  endl;
-    //cout << " System begins in --> " << smallestOffset(vecCisterns) <<  endl;
+    //displayCisterns(vecCisterns);
 
-    overflow(vecCisterns, quantityOfWater);
-    displayCisterns(vecCisterns);
-
-    cout << "quantity of water" << quantityOfWater << endl;
     int answer = fillCist(vecCisterns, iLowestSystemOffeset, iSystemHeight, quantityOfWater, 0);
 
-    cout << "Answer " << answer << endl;
+    getAnswer(answer);
+
 
     //caso de prueba
     /*
