@@ -15,8 +15,6 @@ struct Cistern {
     int iWidth;
     int iFloorOffset;
     int iRelativeHeight;
-    bool bFull = false;
-    int iCurrentVolume = 0;
 
     int getVolume(){ //volume in cubic meters
         return iDepth*iHeight*iWidth;
@@ -34,13 +32,7 @@ struct Cistern {
         return iFloorOffset;
     }
 
-    bool isFull(){
-        return bFull;
-    }
 
-    int getCurrentVolume(){
-        return iCurrentVolume;
-    }
 
     // Constructor
     Cistern(int f, int d, int h, int w) : iFloorOffset(f), iDepth(d),
