@@ -181,110 +181,67 @@ int bestCase(vector<Cistern> &v){
     return iSystemVolume;
 }
 
-int getRelativeSystemVolume(int iMiddle, vector<Cistern> &v,int iWaterQuantity){
 
-    int iMaxWaterHeight = 0;
-    int iWater = 0;
-    int i = 0;
+////////////////////////////////////////////////////////////////////////////////
 
-    //llena cisternas que estan totalmente bajo la mitad
-    while(v[i].getRelativeHeight() <= iMiddle && !v.back().isFull()) {
+int getRelativeSystemVolume(vector<Cistern> &v, int iCurrentLevel){
 
-        if(i > v.size()){
-            break;
+    int iCurrentQuantityOfWater = 0;
+    int iRealtiveHeight;
+
+    //objective: iCurrentQuantityOfWater
+
+    //llena cisternas que estan totalmente bajo la mitad o current level
+    for(int i =0; i < v.size(); i++){
+
+        if(v[i].getRelativeHeight() <= iCurrentLevel){
+
+            iCurrentQuantityOfWater = iCurrentQuantityOfWater + v[i].getVolume();
         }
+    }
+    //llena cisternas que interesectan con middle
+    for(int i =0; i < v.size(); i++){
 
-        if (!v[i].isFull()){
+        if(v[i].getFloorOffset() <= iCurrentLevel && v[i].getRelativeHeight() > iCurrentLevel){
 
-            iWater = iWater + v[i].getRelativeVolume(v[i+1].getFloorOffset() - v[i].getFloorOffset());
-
-            if(v[i+1].getFloorOffset() >= v[i].getRelativeHeight()){
-                v[i].bFull = true;
-                cout << "Cistern " << i << " " << v[i].iCurrentVolume << endl;
-
-            } else {
-
-                v[i].iCurrentVolume = v[i].getRelativeVolume(v[i+1].getFloorOffset()  - v[i].getFloorOffset()) + v[i].iCurrentVolume;
-                cout << "Cistern " << i << " " << v[i].iCurrentVolume << endl;
-
-
-            }
-            //iMaxWaterHeight = v[i].getRelativeHeight();
-            cout << "VOL" << v[i].getVolume() << endl;
-
-            i++;
-
+            iRealtiveHeight = iCurrentLevel - v[i].getFloorOffset();
+            iCurrentQuantityOfWater = iCurrentQuantityOfWater + v[i].getRelativeVolume(iRealtiveHeight);
         }
-
-        //llena cisternas que interesectan con middle
-        if (v[i].getFloorOffset() < iMiddle && v[i].getRelativeHeight() > iMiddle){
-
-            iWater = iWater + v[i].getRelativeVolume(iMiddle - v[i].getFloorOffset());
-            i++;
-            v[i].iCurrentVolume = v[i].getRelativeVolume(iMiddle - v[i].getFloorOffset()) + v[i].iCurrentVolume;
-            cout << "VOL PARCIAL" << v[i].getRelativeVolume(iMiddle - v[i].getFloorOffset()) << endl;
-
-            //checa si ya se lleno la cisternas
-
-        }
-
-        i++;
-
     }
 
-    cout << "i water" << iWater << endl;
-    cout << "contador " << i << endl;
-
-    return iWaterQuantity - iWater;
-
-
+    return iCurrentQuantityOfWater;
 }
 
-int fillCist(vector<Cistern> &v, int iLow, int iTop, int quantityOfWater){
+int fillCist(vector<Cistern> &v, int iLow, int iTop, int iDesiredQuantityOfWater, int iCurrentQuantityOfWater){
 
-    int iMiddle = (iTop + iLow) / 2;
-    int iCounter = 0;
-    int iMaxWaterHeight = iLow;
+    int iCurrentLevel = (iTop + iLow) / 2;
 
-    cout << "mid " << iMiddle << endl;
+    cout << "Current level =  " << iCurrentLevel << endl;
 
-    if (iLow > iTop || overflow(v,quantityOfWater)) {
-
-		iMaxWaterHeight = -1;
-        cout << "111";
-        cout << "mid " << iMiddle << endl;
-
+    if (iLow > iTop) {
+		iCurrentLevel = -1;
+        cout << "iLow > iTop. Middle = " << iCurrentLevel;
 	} else {
 
-        int iMiddle = (iTop + iLow) / 2;
+        if(iDesiredQuantityOfWater == getRelativeSystemVolume(v, iCurrentLevel)){
+            cout << "IF level =  " << iCurrentLevel << endl;
 
-		if((getRelativeSystemVolume(iMiddle, v, quantityOfWater)) == quantityOfWater){
 
-            cout << getRelativeSystemVolume(iMiddle, v, quantityOfWater) << endl;
-            cout << quantityOfWater << endl;
+        } else {
 
-			iMaxWaterHeight = iMiddle;
-            cout << "222 ";
-            cout << "mid " << iMiddle << endl;
+            if (iDesiredQuantityOfWater > getRelativeSystemVolume(v, iCurrentLevel)) {
 
-		}  else {
+                iCurrentLevel = fillCist(v, iCurrentLevel + 1, iTop, iDesiredQuantityOfWater, getRelativeSystemVolume(v, iCurrentLevel));
 
-			if ((getRelativeSystemVolume(iMiddle, v, quantityOfWater)) > quantityOfWater) {
+            } else{
 
-				iMaxWaterHeight = fillCist(v, iLow, iMiddle, quantityOfWater);
-                cout << "333 ";
-                cout << "mid " << iMiddle << endl;
+                iCurrentLevel = fillCist(v,iLow, iCurrentLevel, iDesiredQuantityOfWater, getRelativeSystemVolume(v, iCurrentLevel));
+            }
+        }
+    }
+    cout << "Last level =  " << iCurrentLevel << endl;
 
-			} else {
-
-				iMaxWaterHeight = fillCist(v, iMiddle + 1, iTop, quantityOfWater);
-                cout << "444 ";
-                cout << "mid " << iMiddle << endl;
-			}
-		}
-	}
-
-    return iMaxWaterHeight;
+    return iCurrentLevel;
 }
 
 
@@ -293,20 +250,21 @@ int main() {
     vector<Cistern> vecCisterns;
     int quantityOfWater = userInput(vecCisterns, quantityOfWater);
 
-    cout << "Desired quantity of water --> " << quantityOfWater << endl;
+    //cout << "Desired quantity of water --> " << quantityOfWater << endl;
 
     sortByFloorOffsetAndHeight(vecCisterns);
 
     int iSystemHeight = systemHeight(vecCisterns);
     int iLowestSystemOffeset = smallestOffset(vecCisterns);
 
-    cout << "    System Height --> " << systemHeight(vecCisterns) <<  endl;
-    cout << " System begins in --> " << smallestOffset(vecCisterns) <<  endl;
+    //cout << "    System Height --> " << systemHeight(vecCisterns) <<  endl;
+    //cout << " System begins in --> " << smallestOffset(vecCisterns) <<  endl;
 
     overflow(vecCisterns, quantityOfWater);
     displayCisterns(vecCisterns);
+
     cout << "quantity of water" << quantityOfWater << endl;
-    int answer = fillCist(vecCisterns, iLowestSystemOffeset, iSystemHeight, quantityOfWater);
+    int answer = fillCist(vecCisterns, iLowestSystemOffeset, iSystemHeight, quantityOfWater, 0);
 
     cout << "Answer " << answer << endl;
 
