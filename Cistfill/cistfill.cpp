@@ -231,11 +231,11 @@ int fillCist(vector<Cistern> &v, int iLow, int iTop, int iDesiredQuantityOfWater
 
             if (iDesiredQuantityOfWater > getRelativeSystemVolume(v, iCurrentLevel)) {
 
-                fillCist(v, iCurrentLevel + 1, iTop, iDesiredQuantityOfWater, getRelativeSystemVolume(v, iCurrentLevel));
+                iCurrentLevel = fillCist(v, iCurrentLevel + 1, iTop, iDesiredQuantityOfWater, getRelativeSystemVolume(v, iCurrentLevel));
 
             } else{
 
-                fillCist(v,iLow, iCurrentLevel, iDesiredQuantityOfWater, getRelativeSystemVolume(v, iCurrentLevel));
+                iCurrentLevel = fillCist(v,iLow, iCurrentLevel, iDesiredQuantityOfWater, getRelativeSystemVolume(v, iCurrentLevel));
             }
         }
     }
@@ -265,9 +265,9 @@ int main() {
     displayCisterns(vecCisterns);
 
     cout << "quantity of water" << quantityOfWater << endl;
-    //int answer = fillCist(vecCisterns, iLowestSystemOffeset, iSystemHeight, quantityOfWater);
+    int answer = fillCist(vecCisterns, iLowestSystemOffeset, iSystemHeight, quantityOfWater, 0);
 
-    //cout << "Answer " << answer << endl;
+    cout << "Answer " << answer << endl;
 
     //caso de prueba
     /*
@@ -279,6 +279,5 @@ int main() {
     78
     */
 
-    //good
 
 }
