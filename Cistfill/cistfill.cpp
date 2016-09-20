@@ -32,8 +32,6 @@ struct Cistern {
         return iFloorOffset;
     }
 
-
-
     // Constructor
     Cistern(int f, int d, int h, int w) : iFloorOffset(f), iDepth(d),
     iHeight(h), iWidth(w){}
@@ -55,32 +53,30 @@ int userInput(vector<Cistern> &v, int quantityOfWater){
     int iCistNumber;
     int iDepth, iHeight, iWidth, iFloorOffset;
 
-    //cout << "# of cisterns --> ";
+    cout << "# of cisterns --> ";
     cin >> iCistNumber;
 
     for (int i = 0; i < iCistNumber; i++) { //Se modifica el valor de cada cisterna
 
-        //cout << "Floor offset of cistern #" << i << " --> ";
+        cout << "Floor offset of cistern #" << i << " --> ";
         cin >> iFloorOffset;
-        //cout << "       Depth of cistern #" << i << " --> ";
+        cout << "       Depth of cistern #" << i << " --> ";
         cin >> iDepth;
-        //cout << "      Height of cistern #" << i << " --> ";
+        cout << "      Height of cistern #" << i << " --> ";
         cin >> iHeight;
-        //cout << "       Width of cistern #" << i << " --> ";
+        cout << "       Width of cistern #" << i << " --> ";
         cin >> iWidth;
-        //Cistern temp(iFloorOffset, iDepth, iHeight, iWidth);
+
         Cistern temp(iFloorOffset, iDepth, iHeight, iWidth);
 
         v.push_back(temp);
     }
-
 
     //cout << "Total quantity of water to store in cubic meters --> ";
     cin >> quantityOfWater;
 
     return quantityOfWater;
 }
-
 
 void displayCisterns(vector<Cistern> &v){
 
@@ -186,8 +182,7 @@ float fillCist(vector<Cistern> &v, int iLow, int iTop, int iDesiredQuantityOfWat
     return iCurrentLevel;
 }
 
-
-void getAnswer(float n){
+float getAnswer(float n){
 
     if(n == -1){
         cout << "OVERFLOW" << endl;
@@ -196,34 +191,87 @@ void getAnswer(float n){
         cout << setprecision (2) << fixed << n;
     }
 
+    return n;
+}
+
+
+void clearVector(vector<Cistern> v){
+
+    while(!v.empty()){
+        v.pop_back();
+    }
+}
+
+//Calcula un nuevo sistema 
+ vector<Cistern> newSystem(vector<Cistern> v){
+
+    float answer;
+    int quantityOfWater = userInput(v, quantityOfWater);
+    sortByFloorOffsetAndHeight(v);
+    int iSystemHeight = systemHeight(v);
+    int iLowestSystemOffeset = smallestOffset(v);
+    displayCisterns(v);
+    answer = fillCist(v, iLowestSystemOffeset, iSystemHeight, quantityOfWater, 0);
+    getAnswer(answer);
+
+    return v;
+}
+//Calcula un nuevo nivel para un sistema que del que ya se tienen los datos
+void oldSystem (vector<Cistern> v, int newQuantityOfWater){
+
+    float answer;
+    displayCisterns(v);
+    answer = fillCist(v, smallestOffset(v), systemHeight(v), newQuantityOfWater, 0);
+    getAnswer(answer);
 }
 
 
 int main() {
 
     vector<Cistern> vecCisterns;
-    int quantityOfWater = userInput(vecCisterns, quantityOfWater);
+    vector<Cistern> vecAux;
+    vecAux = newSystem(vecCisterns);
 
-    sortByFloorOffsetAndHeight(vecCisterns);
+    int newQuantityOfWater;
 
-    int iSystemHeight = systemHeight(vecCisterns);
-    int iLowestSystemOffeset = smallestOffset(vecCisterns);
+    char userAns;
+    cout << endl;
+    cout << "Quiere hacer otro cálculo? (y/n)" << endl;
+    cin >> userAns;
 
-    //displayCisterns(vecCisterns);
+    while(userAns != 'n'){
 
-    int answer = fillCist(vecCisterns, iLowestSystemOffeset, iSystemHeight, quantityOfWater, 0);
+        char userAns2;
+        cout << endl;
+        cout << "Con el mismo sistema? (y/n)" << endl;
+        cin >> userAns2;
 
-    getAnswer(answer);
+        if(userAns2 == 'n'){
+            clearVector(vecCisterns);
+            newSystem(vecCisterns);
+            vecAux = newSystem(vecCisterns);
+            cout << endl;
 
-    //caso de prueba
-    /*
-    4
-    11 1 7 5
-    15 2 6 2
-    19 1 4 8
-    5 1 8 5
-    78
-    */
+        } else {
+            cout << "Introduzca la nueva cantidad de agua" << endl;
+            cin >> newQuantityOfWater;
+            oldSystem(vecAux, newQuantityOfWater);
+            cout << endl;
+        }
 
-
+        char userAns;
+        cout << endl;
+        cout << "Quiere hacer otro cálculo? (y/n)" << endl;
+        cin >> userAns;
+    }
 }
+
+//caso de prueba
+/*
+4
+11 1 7 5
+15 2 6 2
+19 1 4 8
+5 1 8 5
+78
+*/
