@@ -1,0 +1,43 @@
+1
+F 0.81 *
+5
+E 0.01 *A
+D 0.01 A*
+C 0.01 *A
+A 1.00 EDCB
+B 0.01 A*
+10
+S 2.23 Q*
+A 9.76 C
+K 5.88 MI
+E 7.54 GC
+M 5.01 OK
+G 7.43 IE
+I 6.09 KG
+C 8.42 EA
+O 4.55 QM
+Q 3.21 SO
+7
+A 3.64 BCD*
+B 3.77 A
+C 6.9 ADE
+D 8.84 ACG
+E 3.52 C*
+G 0.97 D
+H 2.38 *
+5
+A 4.76 MX
+M 9.63 *AG
+G 1.59 MD
+X 6.78 A*D
+D 6.04 GX
+2
+B 4.4 *A
+A 4.4 *B
+1
+C 0.01 *
+4
+A 8.99 BCD
+B 6.98 *ACD
+C 0.73 DBA
+D 6.88 ABC
