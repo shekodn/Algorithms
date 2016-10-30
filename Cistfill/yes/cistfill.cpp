@@ -72,7 +72,7 @@ int userInput(vector<Cistern> &v, int quantityOfWater){
         v.push_back(temp);
     }
 
-    cout << "Total quantity of water to store in cubic meters --> ";
+    //cout << "Total quantity of water to store in cubic meters --> ";
     cin >> quantityOfWater;
 
     return quantityOfWater;
