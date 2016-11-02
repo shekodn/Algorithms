@@ -1,8 +1,8 @@
 build:
-	g++ dijkstra.cpp -o dijkstra
+	g++ dijkstra.cpp
 
 run:
-	./dijkstra
+	./a.out
 
 clean:
-	rm dijkstra
+	a.out
