@@ -1,0 +1,17 @@
+***Algoritmos voraces***
+
+kruskal se basa solo en los arcos 
+
+Primm toma en cuenta los nodos de los arcos que actualmente estan en el conjunto
+
+Kruskall requiere de un sort, se va al menor Ordenar los arcos. Por el sort es M log n, primera parte es n log n, luego es lineal el asunto
+
+Pregunta examen: 
+cuantos arcos puede tener un un grafo no dirigido conectado de n vertices?
+minimo: n - 1
+max: ( n(n-1) )/ 2 
+
+Prim agarra un nodo y luego otro y otro... se empieza por el proimer nodo
+
+pocos arcos = kruskall 
+muchos arcos = prim 

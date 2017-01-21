@@ -1,0 +1,9 @@
+1. Tercer arco que seleccion el algoritmo de Prim en el grafo que se muestra = c - e 
+2. En que lugar el algoritmo de kruskal seleccioa el arco c-e del grafo que se muestra = cuarto 
+3. Algoritmo mas conveniente para obtener el arbol de extension minima del grafo que se muestra = PRIM (era un grafo denso), kruskall ordena entonces por eso no conviene 
+4. NO es un camino mas corto obtenido por el algoritmo de dijkstra en el siguiente grafo...foto..A-D-C
+5. Orden del mejor algoritmo para encontrar el camino mas corto de nodo  a otro = n^2 
+6. Problema consiste en maximizar = problema de la mochila 
+7. criterio de seleccion mas conveniente en el problema de la mochila = valor/peso
+8. Tecninca que no sirve para solucinar el problema de la mochila sin fraccionar objetos = voraces
+9. 

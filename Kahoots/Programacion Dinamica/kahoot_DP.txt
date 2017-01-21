@@ -1,0 +1,15 @@
+//DP
+
+1. dada la matriz d^n resultado de floyd cuanto vale el camino mas corto del nodo 3 al 5...te vas a la coordenada 3, 5
+
+2. Dada la matriz d^3 de floyd que valor tendra d^4 [4,3] ver foto respuesta es 9
+
+3. La matriz d^n de floyd se obtiene despues de n*n*n calculos = VERDADERO
+
+4. La casilla 7,8 de la matriz de goodbole contiene el resultado de a*b*c donde B es la cantidad de columnas de la matriz 7
+
+5. Que casilla de matriz de G&M tendra el valor menor para el siguiente ABB optimo en un arbol de 6 nodos, es en la 5,5...el valor menor es el 1, el 5 es la probabilidad menor....ver foto 
+
+6. cual es el valor de [5, {v2}] en la matriz de prob del viajero dada la matriz de adyacencias....9
+
+7. ver foto...respuesta es circulo [v4 {v2 v3 v5}]

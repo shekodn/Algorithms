@@ -1,0 +1,16 @@
+Divide y vencerás
+
+2. Dividir un problema en n/2 subproblemas de tamaño dos...una mala forma de aplicar la tecnica de divide y venceras
+
+3. Cantidad maxima de comparaciones que hara la
+busqueda binaria con 32 datos = 5 
+
+4. minimo de comparaciones de datos que hara el mergesort al unir dos subarreglos = n/2
+
+5. complejidad del quicksort cuando ordena datos ya ordenados usando el ultimo dato como pivote = n^2
+
+6. Cantidad de llamadas recursicas que realza strassen con matrices de 2x2 como entrada = cero (umbral)
+
+7. cual es el umbral a manejar la multiplicacion de enteros grandes o por divide y venceras = numeros almacenables en tipo de dato entero 
+
+8. cual es el peor orden de complejidad que se puede obtener al utilizar divide y vencerás = exponencial

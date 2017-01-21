@@ -1,0 +1,15 @@
+//Backtracking 
+
+Backtracking es una tecnica para resolver problemas de optimizacion = flso, si puede peero no es su filosofia 
+
+Cantidad de niveles de arbol de soluciones apra el mapa...es la cantidad de nodos + el 1 (dummy
+
+ciclos hamiltonianos, pasar por todos y regresar al inicio 
+
+Tecnica que no sirve para solucionar el problema de la mochila sin fraccionar objetos = algoritmos voraces
+
+Heaps, saber que lista es heap y cual no es...
+
+para heap de 7 datos que posiciones pueden ocupar el dato de la ultima prioridad ...de la 4 a la 7
+
+orden de complejidad del heap sort en el peor caso = n log n

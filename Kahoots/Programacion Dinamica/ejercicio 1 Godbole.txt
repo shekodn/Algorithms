@@ -1,0 +1,21 @@
+ejercicio 1 Godbole
+1 = 9
+*columna de una es el renglon de la que le sigue. Por eso no se duplican 
+2. matriz 5 es de 6 x 7 (Mk = dk-1 x dk)
+3. 576 (D 1,9)
+4. 2 x 5 (dimension primera con la dimesion ultima)
+5. 770
+6. entre 8 formulitas 
+***8 en el rengoln y 8 en la columna = 16
+
+ejercicio 2
+resultado = 531
+(1,5)
+Dimensiones: 8,5,9,3,15,4
+
+ejercicio 3
+resultado con orden 2 = 48
+con orden 3 = 162
+con 4 = 384
+
+(n^3) * (k - 1)
