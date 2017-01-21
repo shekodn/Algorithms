@@ -1,15 +1,35 @@
-# Algorithms
+#Algorithms
 
-Problems of my Analysis and algorithms design course
+Problems from my Analysis and algorithms design course taken in the fall semester of 2016 with Professor Roman Martinez 
+
+##Techniques:
 
 ### Divide & Conquer
-  - [Swaps in Merge Sort](https://github.com/jluisfgarza/algorithms/tree/master/Swaps%20in%20Merge%20Sort)
+- Search
+- Quick Sort
+- Merge Sort
+- Matrix Multiplication (Strassen)
+- Big integer's arithmetic
 
 ### Dynamic Programming
- 
+- Floyd's Algorithm 
+- Travelling salesman problem
 
-### Numeric
-  
+### Greedy algorithms
+- Prim 
+- Kruskal
+- Knapsack problem
 
-### Strings
+### Backtracking
+- Queens in board 
+- Coloring a map
+- Knapsack problem
+- Hamiltonian path problem
+
+###Branch & bound
+- Knapsack problem
+- Heaps and Priority Queues
+
+
+
   

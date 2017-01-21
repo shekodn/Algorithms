@@ -2,16 +2,11 @@
 #include <iostream>
 #include <queue>
 #include <array>
+
 using namespace std;
 
-///////////////////////////////////////////HEAP
 
-void printArr(int arr[], int n){
-    for(int i = 0; i < n; i++){
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-}
+/////////////////////////////////////////////////////////
 
 void myHeapSort(int arr[]){
     priority_queue<int> mypq;
@@ -20,7 +15,6 @@ void myHeapSort(int arr[]){
 
     for(int i = 0; i < arrSize; i ++){
         mypq.push(arr[i]);
-
     }
 
     for(int i = arrSize - 1; i >= 0; i--){
@@ -29,37 +23,61 @@ void myHeapSort(int arr[]){
     }
 }
 
+void printArr(int arr[], int n){
+    for(int i = 0; i < n; i++){
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
 
 
-///////////////////////////////////////////Backtracking setup
 int sumaArreglo(int arr[], int n){
+
     int iSuma = 0;
+
     for(int i = 0; i <= n; i++){
+
         iSuma = iSuma + arr[i];
     }
+
     return iSuma;
 }
 
+
+
 int rellenaArreglo(int arr[], int n){
+
     for(int i = 0; i <= n; i++){
         arr[i] = i;
     }
 }
 
 int rellenaArregloCeros(int arr[], int n){
+
     for(int i = 0; i <= n; i++){
         arr[i] = 0;
     }
 }
 
+
+void rellenaVector(vector<int> arr, int n){
+    for(int i = 0; i <= n; i++){
+        arr.push_back(i);
+    }
+
+}
+
+
 int userInput(){
+
     int n;
     cout << "Type a number -> ";
     cin >> n;
+    cout << endl;
     return n;
 }
 
-/////////////////////////////////////////////////////////Algorithm
+/////////////////////////////////////////////////////////
 //Global
 int VALOR; //valor que se busca
 
@@ -92,7 +110,7 @@ void sum_of_subsets (int obj[], int include[], int i, int acum, int total, int i
 }
 
 
-void problem1(){ //heap
+void problem1(){
     //Problema 1
     int myArr[7] = {7,1,5,3,6,2,4};
     cout << "Before sort: ";
@@ -103,7 +121,7 @@ void problem1(){ //heap
 
 }
 
-void problem2(){//backtracking
+void problem2(){
 
     //Problema 2
     int in = userInput(); //numero del usuario
@@ -121,9 +139,11 @@ void problem2(){//backtracking
 
 int main(){
 
-    problem1();
-    cout << endl;
+    //problem1();
     problem2();
+
+
+
 
     return 0;
 }

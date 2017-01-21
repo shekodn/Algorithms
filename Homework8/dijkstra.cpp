@@ -227,7 +227,7 @@ void camino(int T[], int vertice){
 
 }
 
-void dijkstra(int W[50][50], int n, int whichNode){ //n = size
+void dijkstra(int W[5][5], int n, int whichNode){ //n = size
 
     int L[n];
     int T[n];
@@ -284,13 +284,13 @@ void dijkstra(int W[50][50], int n, int whichNode){ //n = size
 int main() {
 
   int input;
-  int iSize = 50;
+  int iSize = 5;
 
   cout << "introduzca un nodo: ";
   cin >> input;
 
   while(input >= 0 && input < iSize){
-    dijkstra(g1, iSize, input);
+    dijkstra(datos, iSize, input);
 
     cout << "introduzca un nodo: ";
     cin >> input;
